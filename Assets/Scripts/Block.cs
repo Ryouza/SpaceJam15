@@ -1,7 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum BlockType {
+	Dirt,
+	Water,
+	Rubber,
+	Bedrock
+}
+
 public class Block : MonoBehaviour {
+
+	public BlockType		type;
 
 	public bool			    bouncy;
 	public int				health;
@@ -10,6 +19,8 @@ public class Block : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		// Load in the attributes for this block type
+
 		this.collider2D.enabled = false;
 		if (bouncy) {
 			PhysicsMaterial2D mat = Resources.Load ("Physics Materials/Rubber", typeof(PhysicsMaterial2D)) as PhysicsMaterial2D;
