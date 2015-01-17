@@ -19,12 +19,16 @@ public class cameraFollow : MonoBehaviour {
 
 	bool CheckXMargin() {
 		// Returns true if the distance between the camera and the player in the x axis is greater than the x margin
-		return Mathf.Abs (transform.position.x - player.position.x) > xMargin;
+		if (player != null) {
+			return Mathf.Abs (transform.position.x - player.position.x) > xMargin;
+		} else return false;
 	}
 
 	bool CheckYMargin() {
 		// Returns true if the distance between the camera and the player in the y axis is greater than the y margin
-		return Mathf.Abs (transform.position.y - player.position.y) > yMargin;
+		if (player != null) {
+			return Mathf.Abs (transform.position.y - player.position.y) > yMargin;
+		} else return false;
 	}
 
 	void FixedUpdate() {

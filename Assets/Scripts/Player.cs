@@ -21,7 +21,6 @@ public class Player : MonoBehaviour {
 	}
 
 	void Update() {
-		Debug.Log (moveDirection);
 		//If attacking, player can not move horizontally
 		if ((!attacking && isGrounded) || !isGrounded) {
 			moveDirection = new Vector2(Input.GetAxis("Horizontal"), 0);
@@ -73,7 +72,7 @@ public class Player : MonoBehaviour {
 
 	//When player collides with GameObject with tag block, isGrounded becomes true.
 	void OnCollisionEnter2D(Collision2D coll) {
-		if(coll.gameObject.tag == "block") {
+		if(coll.gameObject.tag == "Block") {
 			isGrounded = true;
 		}
 	}

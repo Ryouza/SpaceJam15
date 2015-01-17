@@ -10,9 +10,12 @@ public class Block : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		// Load in the attributes for this block type
-		GameObject go = GameObject.Find("Main Camera");
+		GameObject go = GameObject.Find("mainCamera");
 		BlockTypes other = (BlockTypes) go.GetComponent(typeof(BlockTypes));
 		data = other.initData (type);
+
+		// Load in the specific block's auxilliary script
+		gameObject.AddComponent(data.auxScript);
 
 		this.collider2D.enabled = false;
 		if (data.bouncy) {
@@ -25,9 +28,9 @@ public class Block : MonoBehaviour {
 		if (!data.solid) {
 			this.collider2D.isTrigger = true;
 		} else {
-			this.collider2D.enabled = true;
 			this.collider2D.isTrigger = false;
 		}
+		this.collider2D.enabled = true;
 	}
 	
 	// Update is called once per frame
@@ -36,12 +39,11 @@ public class Block : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
+		Debug.Log ("Block Collide!");
 		GameObject collidedWith = coll.gameObject;
+		Attack attack = (Attack)this.gameObject.GetComponent(typeof(Attack));
 		if (collidedWith.tag == "Weapon" && !data.indestructible) {
-			data.health -= 1;// coll.gameObject.GetComponent<Attack>.damage;
-			if (data.health <= 0) {
-				Destroy (gameObject);
-			}
+			// attack.Damage(collidedWith, this.gameObject);
 		}
 	}
 }
