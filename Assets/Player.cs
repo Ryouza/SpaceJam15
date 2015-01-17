@@ -6,8 +6,11 @@ public class Player : MonoBehaviour {
 	public float speed;
 	public float jumpSpeed;
 	public float gravity;
-	private Vector2 moveDirection = Vector2.zero;
 	public bool isGrounded;
+	public KeyCode key = KeyCode.K;
+	public GameObject weapon;
+
+	private Vector2 moveDirection = Vector2.zero;
 
 	void Start() {
 		isGrounded = false;
@@ -19,12 +22,19 @@ public class Player : MonoBehaviour {
 		moveDirection *= speed;
 		if (!isGrounded) {
 			rigidbody2D.AddForce(new Vector2(0, -gravity * Time.deltaTime));
+			if (Input.GetKeyDown(key) {
+				
+			}
 		}
 		if (isGrounded) {
 			if (Input.GetButton("Jump")) {
 				rigidbody2D.AddForce (new Vector2(0, moveDirection.y));
 				rigidbody2D.AddForce (new Vector2(0, jumpSpeed));
 				isGrounded = false;
+			}
+			if (Input.GetKeyDown(key) {
+				GameObject attack = Instantiate(weapon, new Vector2(0, 0), Quaternion.identity);
+				attack.transform.parent = GameObject.Find(self).transform;
 			}
 		}
 		Debug.Log (rigidbody2D.velocity);
