@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Health : MonoBehaviour {
 	public float health = 1;
-		
+
+	//Sets health of object attached to it.
 	void set (string tag) {
 		if (tag == "block") {
 			health = 1;
@@ -20,6 +21,7 @@ public class Health : MonoBehaviour {
 		set (this.gameObject.tag);
 	}
 
+	//If health of object is less than or equal to 0, destroy object.
 	void Update () {
 		if (health <= 0) {
 			Destroy (this.gameObject);
