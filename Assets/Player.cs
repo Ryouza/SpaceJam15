@@ -21,8 +21,9 @@ public class Player : MonoBehaviour {
 	}
 
 	void Update() {
+		Debug.Log (moveDirection);
 		//If attacking, player can not move horizontally
-		if (!attacking) {
+		if ((!attacking && isGrounded) || !isGrounded) {
 			moveDirection = new Vector2(Input.GetAxis("Horizontal"), 0);
 		}
 		//If horizontal movement of player is pos, then faceRight becomes true.
@@ -35,6 +36,9 @@ public class Player : MonoBehaviour {
 		//MoveDirection is multiplied with speed.
 		moveDirection = transform.TransformDirection(moveDirection);
 		moveDirection *= speed;
+		if (Mathf.Abs(moveDirection.x) >= speed) {
+			moveDirection.x = speed * Mathf.Sign(moveDirection.x);
+		}
 		//If isGrounded is false, add negative y force on player allows for aerial attack.
 		if (!isGrounded) {
 			rigidbody2D.AddForce(new Vector2(0, -gravity * Time.deltaTime));
@@ -86,18 +90,21 @@ public class Player : MonoBehaviour {
 			GameObject attack;
 			if(isGrounded) {
 				if (faceRight) {
-					attack = Instantiate(weapon, new Vector2(transform.position.x+0.6f, transform.position.y),
-					                     weapon.transform.rotation) as GameObject;
+					attack = Instantiate(weapon, new Vector2(transform.position.x + 1.0f, transform.position.y),
+//					                     weapon.transform.rotation) as GameObject;
+					                     Quaternion.identity) as GameObject;
 				} else {
-					attack = Instantiate(weapon, new Vector2(transform.position.x-0.6f, transform.position.y),
-					                     weapon.transform.rotation) as GameObject;
+					attack = Instantiate(weapon, new Vector2(transform.position.x - 1.0f, transform.position.y),
+//					                     weapon.transform.rotation) as GameObject;
+					                     Quaternion.identity) as GameObject;
 				}
+				moveDirection = Vector2.zero;
 			} else {
-				attack = Instantiate(weapon, new Vector2(transform.position.x, transform.position.y-0.6f),
+				attack = Instantiate(weapon, new Vector2(transform.position.x, transform.position.y - 1.0f),
 				                     weapon.transform.rotation) as GameObject;
 			}
 			attack.transform.parent = GameObject.Find(this.name).transform;
-			moveDirection = Vector2.zero;
+//			moveDirection = Vector2.zero;
 			StartCoroutine(DestroyWeapon());
 		}
 	}
