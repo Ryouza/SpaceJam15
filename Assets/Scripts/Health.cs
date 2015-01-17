@@ -4,7 +4,7 @@ using System.Collections;
 public class Health : MonoBehaviour {
 	public float health = 1;
 		
-	public Health (string tag) {
+	void set (string tag) {
 		if (tag == "block") {
 			health = 1;
 		}
@@ -17,7 +17,7 @@ public class Health : MonoBehaviour {
 	}
 
 	void Start () {
-
+		set (this.gameObject.tag);
 	}
 
 	void Update () {
