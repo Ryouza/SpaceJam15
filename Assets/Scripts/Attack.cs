@@ -15,6 +15,9 @@ public class Attack : MonoBehaviour {
 				Player player = b.gameObject.GetComponent<Player>() as Player;
 				if (player.invin) return;
 				else {
+					GameObject obj = GameObject.Find ("JackhammerPrincess");
+					SpriteRenderer sprite = obj.GetComponent<SpriteRenderer>();
+					sprite.color = Color.red;
 					player.invin = true;
 				}
 			}

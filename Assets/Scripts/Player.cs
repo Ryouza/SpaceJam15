@@ -42,7 +42,7 @@ public class Player : MonoBehaviour {
 		currGrav = gravity;
 		
 		waterSpeed = speed / 2.5f;
-		waterGrav = gravity / 2f;
+		waterGrav = gravity / 4f;
 		waterJump = jumpSpeed;
 		
 		invinFrames = 0;
@@ -55,6 +55,9 @@ public class Player : MonoBehaviour {
 			invinFrames++;
 		}
 		if (invinFrames >= maxInvinFrames) {
+			GameObject obj = GameObject.Find ("JackhammerPrincess");
+			SpriteRenderer sprite = obj.GetComponent<SpriteRenderer>();
+			sprite.color = Color.white;
 			invin = false;
 			invinFrames = 0;
 		}
