@@ -1,15 +1,22 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Water : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
+	void OnTriggerEnter2D(Collider2D coll) {
+		GameObject collidedWith = coll.gameObject;
+		if (collidedWith.tag == "Player") {
+			Player player = collidedWith.GetComponent<Player> ();
+			player.watersTouched++;
+		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void OnTriggerExit2D(Collider2D coll) {
+		GameObject collidedWith = coll.gameObject;
+		if (collidedWith.tag == "Player") {
+			Player player = collidedWith.GetComponent<Player> ();
+			player.watersTouched--;
+		}
 	}
+
 }

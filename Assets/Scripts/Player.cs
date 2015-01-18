@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Player : MonoBehaviour {
@@ -13,6 +13,8 @@ public class Player : MonoBehaviour {
 	public bool attacking; //Checks if player is attacking
 	public KeyCode key = KeyCode.K; //Button for attacking
 	public GameObject weapon; //GameObject that is created for attacking
+
+	public int watersTouched = 0;
 
 	void Start() {
 		isGrounded = false;
@@ -60,6 +62,14 @@ public class Player : MonoBehaviour {
 		}
 		//Moves player using velocity
 		rigidbody2D.velocity += (moveDirection * Time.deltaTime);
+
+		// If the player is touching any amount of water, slow him down
+		if (watersTouched == 0) {
+			speed = 120;
+		}
+		else {
+			speed = 30;
+		}
 	}
 
 	//IEnumerator which destroys Children[0] and turns attacking false;
