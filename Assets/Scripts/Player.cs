@@ -97,9 +97,15 @@ public class Player : MonoBehaviour {
 
 	//When player collides with GameObject with tag block, isGrounded becomes true.
 	void OnCollisionEnter2D(Collision2D coll) {
-		if(coll.gameObject.tag == "block") {
+		if(coll.gameObject.tag == "Block") {
 			isGrounded = true;
 			anim.SetInteger("state", 0);
+		}
+	}
+
+	void OnCollisionExit2D(Collision2D coll) {
+		if(coll.gameObject.tag == "Block") {
+			isGrounded = false;
 		}
 	}
 
