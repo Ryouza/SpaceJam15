@@ -6,7 +6,12 @@ public class Lava : MonoBehaviour {
 	private float		knockback = 125;
 
 	void Start(){
-		this.gameObject.tag = "lava";
+		// Change tag for collision purposes
+		this.gameObject.tag = "Lava";
+
+		// Load in lava texture
+		Material mat = Resources.Load ("Textures/Lava", typeof(Material)) as Material;
+		this.gameObject.renderer.material = mat;
 	}
 
 	void OnTriggerEnter2D(Collider2D coll) {

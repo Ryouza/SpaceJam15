@@ -6,7 +6,7 @@ public enum BlockType {
 	Water,
 	Lava,
 	Rubber,
-	Bedrock
+	Metal
 };
 
 public struct BlockData {
@@ -52,11 +52,11 @@ public class BlockTypes : MonoBehaviour {
 				data.indestructible = true;
 				data.auxScript = "Rubber";
 				break;
-			case BlockType.Bedrock:
+			case BlockType.Metal:
 				data.bouncy = false;
 				data.solid = true;
 				data.indestructible = true;
-				data.auxScript = "Bedrock";
+				data.auxScript = "Metal";
 				break;
 			default:
 				data.bouncy = false;
