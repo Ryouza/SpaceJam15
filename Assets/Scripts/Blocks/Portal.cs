@@ -4,9 +4,8 @@ using System.Collections;
 public class Portal : MonoBehaviour {
 
 	void Start(){
-		Color portal = Color.magenta;
-		portal.a = 0.5f;
-		this.gameObject.renderer.material.color = portal;
+		Material mat = Resources.Load ("Textures/Portal", typeof(Material)) as Material;
+		this.gameObject.renderer.material = mat;
 	}
 
 	void OnTriggerEnter2D(Collider2D coll) {

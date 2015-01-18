@@ -56,5 +56,16 @@ public class MainMenuButtonBehavior : MonoBehaviour {
 		canvas.enabled = true;
 	}
 
+	public void RestartLevel() {
+		//reloads the current level.
+		Application.LoadLevel (Application.loadedLevel);
+	}
+
+	public void RestartGame() {
+		//Loads the MainMenu.
+		Application.LoadLevel ("MainMenu");
+	}
+
+
 
 }
