@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Attack : MonoBehaviour {
 	float jack_damage = 1;
-	float monster_damage = 0;
+	float monster_damage = 1;
 	float lava_damage = 1;
 
 	//Checks what type of object a is. If object a is a weapon, it deals weapon damage

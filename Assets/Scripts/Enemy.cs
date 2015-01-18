@@ -114,7 +114,7 @@ public class Enemy : MonoBehaviour {
 	//When player collides with GameObject with tag block, isGrounded becomes true.
 	void OnCollisionEnter2D(Collision2D coll) {
 		if(coll.gameObject.tag == "Player") {
-			isGrounded = true;
+			isGrounded = false;
 //			sprite.GetComponent<SpriteRenderer>().sprite = Resources.LoadAssetAtPath("Assets/Resources/Images/JackhammerPrincess.png",
 //			                                                                         typeof(Sprite)) as Sprite;
 			anim.SetInteger("state", 2);

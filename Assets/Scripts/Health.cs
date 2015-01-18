@@ -24,6 +24,14 @@ public class Health : MonoBehaviour {
 	//If health of object is less than or equal to 0, destroy object.
 	void Update () {
 		if (health <= 0) {
+			if (this.gameObject.tag == "Player") {
+				GameObject camera = GameObject.Find("mainCamera");
+				NextLevel next = (NextLevel)camera.GetComponent<NextLevel>();		
+				
+				if (this.gameObject.tag == "Player") {
+					Application.LoadLevel(next.currLevel);
+				}
+			}
 			Destroy (this.gameObject);
 		}
 	}
