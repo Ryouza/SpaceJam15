@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using SmoothMoves;	// using SmoothMoves
+/*using SmoothMoves;	// using SmoothMoves
 
 public class FlowerAnimationButton : MonoBehaviour {
 	
@@ -32,3 +32,4 @@ public class FlowerAnimationButton : MonoBehaviour {
 		}
 	}
 }
+*/
