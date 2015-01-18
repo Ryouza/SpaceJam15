@@ -10,6 +10,8 @@ public class JackHammer : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D coll) {
 		GameObject temp = coll.gameObject;
+		Block block = (Block)temp.gameObject.GetComponent(typeof(Block));
+		if (temp.tag == "Block" && block.data.indestructible) return;
 		attack.Damage(this.gameObject, ref temp);
 	}
 }

@@ -103,12 +103,6 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionExit2D(Collision2D coll) {
-		if(coll.gameObject.tag == "Block") {
-			isGrounded = false;
-		}
-	}
-
 	//Attack(ref bool attacking, bool isGrounded) runs the attack process.
 	//It creates a GameObject, attack, which is an instantiated weapon.
 	//The position of attack is based on isGrounded. If isGrounded is true, attack is either left or right

@@ -6,7 +6,8 @@ public enum BlockType {
 	Water,
 	Lava,
 	Rubber,
-	Metal
+	Metal,
+	Portal
 };
 
 public struct BlockData {
@@ -44,7 +45,7 @@ public class BlockTypes : MonoBehaviour {
 				data.solid = false;
 				data.indestructible = false;
 				data.auxScript = "Lava";
-				data.tag = "lava";
+				data.tag = "Lava";
 				break;
 			case BlockType.Rubber:
 				data.bouncy = true;
@@ -57,6 +58,12 @@ public class BlockTypes : MonoBehaviour {
 				data.solid = true;
 				data.indestructible = true;
 				data.auxScript = "Metal";
+				break;
+			case BlockType.Portal:
+				data.bouncy = false;
+				data.solid = false;
+				data.indestructible = true;
+				data.auxScript = "Portal";
 				break;
 			default:
 				data.bouncy = false;
