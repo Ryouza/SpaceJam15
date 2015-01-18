@@ -3,27 +3,34 @@ using System.Collections;
 
 public class Block : MonoBehaviour {
 
-	public bool			    bouncy;
-	public int				health;
-	public bool				solid;
-	public bool				indestructible;
+	public BlockType		type;
+
+	private BlockData		data;
 
 	// Use this for initialization
 	void Start () {
+		// Load in the attributes for this block type
+		GameObject go = GameObject.Find("mainCamera");
+		BlockTypes other = (BlockTypes) go.GetComponent(typeof(BlockTypes));
+		data = other.initData (type);
+
+		// Load in the specific block's auxilliary script
+		gameObject.AddComponent(data.auxScript);
+
 		this.collider2D.enabled = false;
-		if (bouncy) {
+		if (data.bouncy) {
 			PhysicsMaterial2D mat = Resources.Load ("Physics Materials/Rubber", typeof(PhysicsMaterial2D)) as PhysicsMaterial2D;
 			if (mat == null) {
 				Debug.Log ("Material not loaded.");
 			}
 			this.collider2D.sharedMaterial = mat;
 		}
-		if (!solid) {
+		if (!data.solid) {
 			this.collider2D.isTrigger = true;
 		} else {
-			this.collider2D.enabled = true;
 			this.collider2D.isTrigger = false;
 		}
+		this.collider2D.enabled = true;
 	}
 	
 	// Update is called once per frame
@@ -32,12 +39,11 @@ public class Block : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
+		Debug.Log ("Block Collide!");
 		GameObject collidedWith = coll.gameObject;
-		if (collidedWith.tag == "Weapon" && !indestructible) {
-			this.health -= 1;// coll.gameObject.GetComponent<Attack>.damage;
-			if (health <= 0) {
-				Destroy (gameObject);
-			}
+		Attack attack = (Attack)this.gameObject.GetComponent(typeof(Attack));
+		if (collidedWith.tag == "Weapon" && !data.indestructible) {
+			// attack.Damage(collidedWith, this.gameObject);
 		}
 	}
 }

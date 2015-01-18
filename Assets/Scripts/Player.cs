@@ -13,25 +13,31 @@ public class Player : MonoBehaviour {
 	public bool attacking; //Checks if player is attacking
 	public KeyCode key = KeyCode.K; //Button for attacking
 	public GameObject weapon; //GameObject that is created for attacking
+	Transform sprite;
+
+	public int watersTouched = 0;
 
 	void Start() {
 		isGrounded = false;
 		faceRight = true;
 		attacking = false;
+		sprite = transform.GetChild(0);
 	}
 
 	void Update() {
-		Debug.Log (moveDirection);
 		//If attacking, player can not move horizontally
 		if ((!attacking && isGrounded) || !isGrounded) {
 			moveDirection = new Vector2(Input.GetAxis("Horizontal"), 0);
 		}
 		//If horizontal movement of player is pos, then faceRight becomes true.
 		//If horizontal movement of player is neg, then faceRight becomes false.
+
 		if (moveDirection.x > 0) {
 			faceRight = true;
+			sprite.localScale = new Vector3 (Mathf.Abs (sprite.localScale.x), sprite.localScale.y, sprite.localScale.z);
 		} else if (moveDirection.x < 0) {
 			faceRight = false;
+			sprite.localScale = new Vector3 (-1 * Mathf.Abs (sprite.localScale.x), sprite.localScale.y, sprite.localScale.z);
 		}
 		//MoveDirection is multiplied with speed.
 		moveDirection = transform.TransformDirection(moveDirection);
@@ -50,31 +56,47 @@ public class Player : MonoBehaviour {
 		if (isGrounded) {
 			if (Input.GetButton("Jump")) {
 				if(!attacking) {
+					sprite.GetComponent<SpriteRenderer>().sprite = Resources.LoadAssetAtPath("Assets/Resources/Images/JumpingJackhammerPrincess.png",
+					                                                                         typeof(Sprite)) as Sprite;
 					rigidbody2D.AddForce (new Vector2(0, moveDirection.y));
 					rigidbody2D.AddForce (new Vector2(0, jumpSpeed));
 					isGrounded = false;
 				}
 			}
 			if (Input.GetKeyDown(key)) {
+				sprite.GetComponent<SpriteRenderer>().sprite = Resources.LoadAssetAtPath("Assets/Resources/Images/JackHammerThrust.png",
+				                                                                         typeof(Sprite)) as Sprite;
 				Attack(ref attacking, isGrounded);
 			}
 		}
 		//Moves player using velocity
 		rigidbody2D.velocity += (moveDirection * Time.deltaTime);
+
+		// If the player is touching any amount of water, slow him down
+		if (watersTouched == 0) {
+			speed = 120;
+		}
+		else {
+			speed = 30;
+		}
 	}
 
-	//IEnumerator which destroys Children[0] and turns attacking false;
+	//IEnumerator which destroys Children[1] and turns attacking false;
 	IEnumerator DestroyWeapon() {
 		yield return new WaitForSeconds (0.5f);
-		GameObject attack = transform.GetChild(0).gameObject;
+		GameObject attack = transform.GetChild(1).gameObject;
 		Destroy (attack);
 		attacking = false;
+		sprite.GetComponent<SpriteRenderer>().sprite = Resources.LoadAssetAtPath("Assets/Resources/Images/JackhammerPrincess.png",
+		                                                                         typeof(Sprite)) as Sprite;
 	}
 
 	//When player collides with GameObject with tag block, isGrounded becomes true.
 	void OnCollisionEnter2D(Collision2D coll) {
 		if(coll.gameObject.tag == "block") {
 			isGrounded = true;
+			sprite.GetComponent<SpriteRenderer>().sprite = Resources.LoadAssetAtPath("Assets/Resources/Images/JackhammerPrincess.png",
+			                                                                         typeof(Sprite)) as Sprite;
 		}
 	}
 

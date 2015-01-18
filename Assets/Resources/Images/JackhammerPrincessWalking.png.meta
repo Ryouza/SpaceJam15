@@ -1,0 +1,146 @@
+fileFormatVersion: 2
+guid: 749772982c49f9b41b03d84e1b814218
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: JackhammerPrincessWalking_0
+    21300002: JackhammerPrincessWalking_1
+    21300004: JackhammerPrincessWalking_2
+    21300006: JackhammerPrincessWalking_3
+    21300008: JackhammerPrincessWalking_4
+    21300010: JackhammerPrincessWalking_5
+    21300012: JackhammerPrincessWalking_6
+    21300014: JackhammerPrincessWalking_7
+    21300016: JackhammerPrincessWalking_8
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: JackhammerPrincessWalking_0
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 1007
+        width: 1891
+        height: 2652
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: JackhammerPrincessWalking_1
+      rect:
+        serializedVersion: 2
+        x: 3074
+        y: 1750
+        width: 9
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: JackhammerPrincessWalking_2
+      rect:
+        serializedVersion: 2
+        x: 3259
+        y: 1540
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: JackhammerPrincessWalking_3
+      rect:
+        serializedVersion: 2
+        x: 3255
+        y: 1507
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: JackhammerPrincessWalking_4
+      rect:
+        serializedVersion: 2
+        x: 3240
+        y: 1464
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: JackhammerPrincessWalking_5
+      rect:
+        serializedVersion: 2
+        x: 3217
+        y: 1445
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: JackhammerPrincessWalking_6
+      rect:
+        serializedVersion: 2
+        x: 3264
+        y: 1088
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: JackhammerPrincessWalking_7
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 1023
+        width: 1897
+        height: 2644
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: JackhammerPrincessWalking_8
+      rect:
+        serializedVersion: 2
+        x: 2677
+        y: 1005
+        width: 2027
+        height: 2754
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 28, y: 0, z: 37, w: 28}
+  spritePackingTag: 
+  userData: 
