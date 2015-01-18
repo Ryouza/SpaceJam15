@@ -25,7 +25,7 @@ public class BlockTypes : MonoBehaviour {
 
 		BlockData data;
 
-		data.tag = "Block";
+		data.tag = "block";
 		switch(type){
 			case BlockType.Stone:
 				data.bouncy = false;
@@ -44,7 +44,7 @@ public class BlockTypes : MonoBehaviour {
 				data.solid = false;
 				data.indestructible = false;
 				data.auxScript = "Lava";
-				data.tag = "Lava";
+				data.tag = "lava";
 				break;
 			case BlockType.Rubber:
 				data.bouncy = true;

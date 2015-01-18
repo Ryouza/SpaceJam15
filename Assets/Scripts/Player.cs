@@ -33,7 +33,6 @@ public class Player : MonoBehaviour {
 		}
 		if ((!attacking && isGrounded) || !isGrounded) {
 			moveDirection = new Vector2(Input.GetAxis("Horizontal"), 0);
-			anim.SetInteger("state", 2);
 		}
 
 		//If horizontal movement of player is pos, then faceRight becomes true.
@@ -118,6 +117,7 @@ public class Player : MonoBehaviour {
 				if (faceRight) {
 					attack = Instantiate(weapon, new Vector2(transform.position.x + 1.0f, transform.position.y),
 					                     Quaternion.identity) as GameObject;
+
 				} else {
 					attack = Instantiate(weapon, new Vector2(transform.position.x - 1.0f, transform.position.y),
 					                     Quaternion.identity) as GameObject;
@@ -128,6 +128,7 @@ public class Player : MonoBehaviour {
 				                     weapon.transform.rotation) as GameObject;
 			}
 			attack.transform.parent = GameObject.Find(this.name).transform;
+			Debug.Log (weapon.tag);
 			StartCoroutine(DestroyWeapon());
 		}
 	}

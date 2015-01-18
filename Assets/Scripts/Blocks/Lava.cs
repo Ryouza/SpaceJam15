@@ -6,7 +6,7 @@ public class Lava : MonoBehaviour {
 	private float		knockback = 125;
 
 	void Start(){
-		this.gameObject.tag = "Lava";
+		this.gameObject.tag = "lava";
 	}
 
 	void OnTriggerEnter2D(Collider2D coll) {

@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Block : MonoBehaviour {
 
-	public BlockType		type;
+	public BlockType type;
 
-	private BlockData		data;
+	private BlockData data;
 
 	// Use this for initialization
 	void Start () {
@@ -42,7 +42,7 @@ public class Block : MonoBehaviour {
 		Debug.Log ("Block Collide!");
 		GameObject collidedWith = coll.gameObject;
 		Attack attack = (Attack)this.gameObject.GetComponent(typeof(Attack));
-		if (collidedWith.tag == "Weapon" && !data.indestructible) {
+		if (collidedWith.tag == "weapon" && !data.indestructible) {
 			// attack.Damage(collidedWith, this.gameObject);
 		}
 	}
