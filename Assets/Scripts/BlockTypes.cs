@@ -37,7 +37,7 @@ public class BlockTypes : MonoBehaviour {
 			case BlockType.Water:
 				data.bouncy = false;
 				data.solid = false;
-				data.indestructible = false;
+				data.indestructible = true;
 				data.auxScript = "Water";
 				break;
 			case BlockType.Lava:

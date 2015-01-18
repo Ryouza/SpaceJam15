@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Lava : MonoBehaviour {
 
-	private float		knockback = 125;
+	private float		knockback = 250;
 
 	void Start(){
 		// Change tag for collision purposes

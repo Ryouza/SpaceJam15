@@ -2,12 +2,20 @@
 using System.Collections;
 
 public class Player : MonoBehaviour {
-
+	
 	public float speed; //Horizontal speed
 	public float jumpSpeed; //Vertical speed
 	public float gravity; //Gravity
 	private Vector2 moveDirection = Vector2.zero; //Vector which moves player
-
+	
+	private float waterSpeed;
+	private float waterJump;
+	private float waterGrav;
+	
+	private float currSpeed;
+	private float currJump;
+	private float currGrav;
+	
 	public bool isGrounded; //Checks whether player is on blocks or not
 	public bool faceRight; //Checks which direction player is facing
 	public bool attacking; //Checks if player is attacking
@@ -15,17 +23,43 @@ public class Player : MonoBehaviour {
 	public GameObject weapon; //GameObject that is created for attacking
 	Transform sprite;
 	Animator anim;
-
+	
+	public int maxInvinFrames;
+	private int invinFrames;
+	public bool invin;
+	
 	public int watersTouched = 0;
-
+	
 	void Start() {
 		isGrounded = false;
 		faceRight = true;
 		attacking = false;
 		sprite = transform.GetChild(0);
 		anim = sprite.GetComponent<Animator> ();
+		
+		currSpeed = speed;
+		currJump = jumpSpeed;
+		currGrav = gravity;
+		
+		waterSpeed = speed / 2.5f;
+		waterGrav = gravity / 2f;
+		waterJump = jumpSpeed;
+		
+		invinFrames = 0;
+		invin = false;
+		
 	}
-
+	
+	void FixedUpdate() {
+		if (invin) {
+			invinFrames++;
+		}
+		if (invinFrames >= maxInvinFrames) {
+			invin = false;
+			invinFrames = 0;
+		}
+	}
+	
 	void Update() {
 		//If attacking, player can not move horizontally
 		if (!attacking && isGrounded) {
@@ -34,7 +68,7 @@ public class Player : MonoBehaviour {
 		if ((!attacking && isGrounded) || !isGrounded) {
 			moveDirection = new Vector2(Input.GetAxis("Horizontal"), 0);
 		}
-
+		
 		//If horizontal movement of player is pos, then faceRight becomes true.
 		//If horizontal movement of player is neg, then faceRight becomes false.
 		if (moveDirection.x > 0) {
@@ -48,13 +82,13 @@ public class Player : MonoBehaviour {
 		}
 		//MoveDirection is multiplied with speed.
 		moveDirection = transform.TransformDirection(moveDirection);
-		moveDirection *= speed;
-		if (Mathf.Abs(moveDirection.x) >= speed) {
-			moveDirection.x = speed * Mathf.Sign(moveDirection.x);
+		moveDirection *= currSpeed;
+		rigidbody2D.AddForce(new Vector2(0, -currGrav * Time.deltaTime));
+		if (Mathf.Abs(moveDirection.x) >= currSpeed) {
+			moveDirection.x = currSpeed * Mathf.Sign(moveDirection.x);
 		}
-		rigidbody2D.AddForce(new Vector2(0, -gravity * Time.deltaTime));
 		if(isGrounded) {
-			rigidbody2D.AddForce(new Vector2(0, gravity * Time.deltaTime));
+			rigidbody2D.AddForce(new Vector2(0, currGrav * Time.deltaTime));
 		}
 		//If isGrounded is false, add negative y force on player allows for aerial attack.
 		if (!isGrounded) {
@@ -68,7 +102,7 @@ public class Player : MonoBehaviour {
 				if(!attacking) {
 					anim.SetInteger("state", 3);
 					rigidbody2D.AddForce (new Vector2(0, moveDirection.y));
-					rigidbody2D.AddForce (new Vector2(0, jumpSpeed));
+					rigidbody2D.AddForce (new Vector2(0, currJump));
 					isGrounded = false;
 				}
 			}
@@ -79,16 +113,20 @@ public class Player : MonoBehaviour {
 		}
 		//Moves player using velocity
 		rigidbody2D.velocity += (moveDirection * Time.deltaTime);
-
+		
 		// If the player is touching any amount of water, slow him down
 		if (watersTouched == 0) {
-			speed = 120;
+			currSpeed = speed;
+			currJump = jumpSpeed;
+			currGrav = gravity;
 		}
 		else {
-			speed = 30;
+			currSpeed = waterSpeed;
+			currJump = waterJump;
+			currGrav = waterGrav;
 		}
 	}
-
+	
 	//IEnumerator which destroys Children[1] and turns attacking false;
 	IEnumerator DestroyWeapon() {
 		yield return new WaitForSeconds (0.5f);
@@ -97,7 +135,7 @@ public class Player : MonoBehaviour {
 		attacking = false;
 		anim.SetInteger ("state", 0);
 	}
-
+	
 	//When player collides with GameObject with tag block, isGrounded becomes true.
 	void OnCollisionEnter2D(Collision2D coll) {
 		if(coll.gameObject.tag == "Block") {
@@ -105,13 +143,13 @@ public class Player : MonoBehaviour {
 			anim.SetInteger("state", 0);
 		}
 	}
-
+	
 	void OnCollisionExit2D(Collision2D coll) {
 		if(coll.gameObject.tag == "Block") {
 			isGrounded = false;
 		}
 	}
-
+	
 	//Attack(ref bool attacking, bool isGrounded) runs the attack process.
 	//It creates a GameObject, attack, which is an instantiated weapon.
 	//The position of attack is based on isGrounded. If isGrounded is true, attack is either left or right
@@ -126,7 +164,7 @@ public class Player : MonoBehaviour {
 				if (faceRight) {
 					attack = Instantiate(weapon, new Vector2(transform.position.x + 1.0f, transform.position.y),
 					                     Quaternion.identity) as GameObject;
-
+					
 				} else {
 					attack = Instantiate(weapon, new Vector2(transform.position.x - 1.0f, transform.position.y),
 					                     Quaternion.identity) as GameObject;
@@ -137,6 +175,7 @@ public class Player : MonoBehaviour {
 				                     weapon.transform.rotation) as GameObject;
 			}
 			attack.transform.parent = GameObject.Find(this.name).transform;
+			Debug.Log (weapon.tag);
 			StartCoroutine(DestroyWeapon());
 		}
 	}

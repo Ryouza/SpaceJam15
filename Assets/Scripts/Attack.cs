@@ -11,6 +11,13 @@ public class Attack : MonoBehaviour {
 	public void Damage(GameObject a, ref GameObject b) {
 		Health health = b.GetComponent< Health > ();
 		if (health != null) {
+			if (b.gameObject.tag == "Player") {
+				Player player = b.gameObject.GetComponent<Player>() as Player;
+				if (player.invin) return;
+				else {
+					player.invin = true;
+				}
+			}
 			if (a.gameObject.tag == "Weapon") {
 				health.health -= jack_damage;
 			}

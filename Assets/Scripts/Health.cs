@@ -7,7 +7,7 @@ public class Health : MonoBehaviour {
 	//Sets health of object attached to it.
 	void set (string tag) {
 		if (tag == "Block") {
-			health = 2;
+			health = 1;
 		}
 		if (tag == "Player") {
 			health = 5;
