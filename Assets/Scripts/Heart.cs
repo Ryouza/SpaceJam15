@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Heart : MonoBehaviour {
-	public GameObject mc;
+	GameObject mc;
 	public Image image;
 	private int size = 5;
 	public List<Image> array = new List<Image> ();
@@ -12,6 +12,7 @@ public class Heart : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		mc = GameObject.Find ("MC");
 		Image new_obj;
 		Camera cam = Camera.main;
 		float height = 2f * cam.orthographicSize;
