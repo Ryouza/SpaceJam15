@@ -52,9 +52,12 @@ public class Player : MonoBehaviour {
 		if (Mathf.Abs(moveDirection.x) >= speed) {
 			moveDirection.x = speed * Mathf.Sign(moveDirection.x);
 		}
+		rigidbody2D.AddForce(new Vector2(0, -gravity * Time.deltaTime));
+		if(isGrounded) {
+			rigidbody2D.AddForce(new Vector2(0, gravity * Time.deltaTime));
+		}
 		//If isGrounded is false, add negative y force on player allows for aerial attack.
 		if (!isGrounded) {
-			rigidbody2D.AddForce(new Vector2(0, -gravity * Time.deltaTime));
 			if (Input.GetKeyDown(key)) {
 				Attack (ref attacking, isGrounded);
 			}
@@ -103,6 +106,12 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	void OnCollisionExit2D(Collision2D coll) {
+		if(coll.gameObject.tag == "Block") {
+			isGrounded = false;
+		}
+	}
+
 	//Attack(ref bool attacking, bool isGrounded) runs the attack process.
 	//It creates a GameObject, attack, which is an instantiated weapon.
 	//The position of attack is based on isGrounded. If isGrounded is true, attack is either left or right
@@ -128,7 +137,6 @@ public class Player : MonoBehaviour {
 				                     weapon.transform.rotation) as GameObject;
 			}
 			attack.transform.parent = GameObject.Find(this.name).transform;
-			Debug.Log (weapon.tag);
 			StartCoroutine(DestroyWeapon());
 		}
 	}
